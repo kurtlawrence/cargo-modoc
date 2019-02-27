@@ -53,7 +53,7 @@ dependencies = [
 
 [[package]]
 name = "cargo-modoc"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "colored 1.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "cratesiover 2.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
