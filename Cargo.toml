@@ -15,3 +15,5 @@ edition = "2018"
 travis-ci = { repository = "kurtlawrence/cargo-modoc" }
 
 [dependencies]
+cratesiover = "2.0"
+colored = "1.6"

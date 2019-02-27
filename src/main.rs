@@ -28,27 +28,67 @@
 //! ```
 //! 
 //! The binary will read the contents of the markdown file and prepend the source file with the line comments (`//!`). If there are any lines in the source file which start with `//!` then these lines are not included (hence the documentation is _overwritten_).
+
+#![warn(missing_docs)]
+
+use colored::*;
 use std::fs;
 use std::io::{self, BufRead, BufReader};
 use std::path::Path;
 
 fn main() {
+	query_and_print_ver_info();
+
 	let config = parse_config(BufReader::new(
 		fs::File::open("modoc.config")
 			.expect("failed to find 'modoc.config' file in root directory"),
 	));
 
-	dbg!(&config);
-
 	for (md, v) in config {
 		for write_file in v {
-			dbg!(format!("reading {}, writing {}", &md, &write_file));
+			println!("reading {}, writing {}", &md, &write_file);
 			write_md_comments(&md, &write_file).expect(&format!(
 				"failed to write md comments of '{}' into '{}'",
 				md, write_file
 			));
 		}
 	}
+}
+
+fn query_and_print_ver_info() {
+	use cratesiover::{self, Status};
+
+	let pkg = env!("CARGO_PKG_VERSION");
+
+	println!("{}", "Checking for later version...".bright_yellow());
+	let print_line = match cratesiover::query("cargo-modoc", pkg) {
+		Ok(status) => match status {
+			Status::Equal(ver) => format!(
+				"{}{}",
+				"Running the latest modoc version ".bright_green(),
+				ver.to_string().bright_green()
+			),
+			Status::Behind(ver) => format!(
+				"{}",
+				format!(
+					"The current modoc version {} is old, please update to {}",
+					pkg, ver
+				)
+				.bright_red()
+			),
+			Status::Ahead(ver) => format!(
+				"{}",
+				format!(
+					"The current modoc version {} is ahead of the crates.io version {}",
+					pkg, ver
+				)
+				.bright_purple()
+			),
+		},
+		Err(_) => format!("{}", "Failed to query crates.io".bright_yellow()),
+	};
+
+	println!("{}", print_line);
 }
 
 fn write_md_comments<P: AsRef<Path>, Q: AsRef<Path>>(md_file: P, write_file: Q) -> io::Result<()> {
