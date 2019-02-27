@@ -1,0 +1,17 @@
+[package]
+name = "cargo-modoc"
+version = "0.1.0"
+authors = ["kurt <kurtlawrence92@gmail.com>"]
+description = "Generate module documentation from markdown files"
+license = "MIT"
+homepage = "https://github.com/kurtlawrence/cargo-modoc"
+repository = "https://github.com/kurtlawrence/cargo-modoc"
+documentation = "https://docs.rs/cargo-modoc/"
+readme = "README.md"
+keywords = [ "documentation", "doc", "module", "markdown"]
+edition = "2018"
+
+[badges]
+travis-ci = { repository = "kurtlawrence/cargo-modoc" }
+
+[dependencies]

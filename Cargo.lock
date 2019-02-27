@@ -1,0 +1,4 @@
+[[package]]
+name = "cargo-modoc"
+version = "0.1.0"
+
