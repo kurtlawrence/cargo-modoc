@@ -1,6 +1,6 @@
 [package]
 name = "cargo-modoc"
-version = "1.0.1"
+version = "1.1.0"
 authors = ["kurt <kurtlawrence92@gmail.com>"]
 description = "Generate module documentation from markdown files"
 license = "MIT"
@@ -14,5 +14,3 @@ edition = "2018"
 [badges]
 travis-ci = { repository = "kurtlawrence/cargo-modoc" }
 
-[dependencies]
-cratesiover =	{ version = "2",    default-features = false }

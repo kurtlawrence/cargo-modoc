@@ -43,10 +43,6 @@ use std::io::{self, BufRead, BufReader};
 use std::path::Path;
 
 fn main() {
-    let pkg = env!("CARGO_PKG_VERSION");
-
-    cratesiover::output("cargo-modoc", pkg).ok();
-
     let config = parse_config(BufReader::new(
         fs::File::open("modoc.config")
             .expect("failed to find 'modoc.config' file in root directory"),
