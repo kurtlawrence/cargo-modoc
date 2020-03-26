@@ -19,7 +19,8 @@
 //!
 //! A configuration file needs to be set up.
 //!
-//! ```text
+//! ```toml
+//! # Comments are allowed
 //! "README.md" = [ "src/main.rs", "src/lib.rs" ]
 //! ```
 //!
@@ -95,7 +96,9 @@ fn parse_config<R: BufRead>(config: R) -> Vec<(String, Vec<String>)> {
     config
         .lines()
         .map(|x| x.unwrap())
+        // Filter out comments and blank lines
         .filter(|x| x.len() > 0)
+        .filter(|x| !x.trim().starts_with('#'))
         .map(|line| {
             let (f, s) = parse_line(&line);
             (
