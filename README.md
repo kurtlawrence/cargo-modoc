@@ -19,7 +19,8 @@ cargo install cargo-modoc
 
 A configuration file needs to be set up.
 
-```text
+```toml
+# Commends are allowed
 "README.md" = [ "src/main.rs", "src/lib.rs" ]
 ```
 
